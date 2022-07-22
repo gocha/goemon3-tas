@@ -53,5 +53,6 @@ SystemID SNES
 000502	w	s	0	WRAM	2P push counter
 00042C	b	s	0	WRAM	Karakuri Walker jump timer
 000C7A	b	u	0	WRAM	Boss Frog State
-000C8C	b	u	0	WRAM	Boss Frog Frame Counter
+000C8C	w	u	0	WRAM	Boss Frog Frame Counter
+000C9C	b	u	0	WRAM	Boss Frog Turn
 
