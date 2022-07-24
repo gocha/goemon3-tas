@@ -222,6 +222,13 @@ function Goemon3SimpleHUD:fetch()
   self.money = bcd_to_number(mainmemory.read_u16_le(0x00be))
 
   self.meters_left = bcd_to_number(mainmemory.read_u16_le(0x00a2))
+  self.chase_players = {}
+  for i = 0, 3 do
+    local base = 0x5b0 + (0x60 * i)
+    self.chase_players[1 + i] = {}
+    self.chase_players[1 + i].height = mainmemory.read_s32_le(base)
+    self.chase_players[1 + i].dimension = mainmemory.read_s32_le(base + 4)
+  end
   self.chase_finish_cooldown = mainmemory.read_s16_le(0x1cbe)
 
   if self.game_state == self.GAME_STATE_CHASE or self.game_state == self.GAME_STATE_IMPACT_BOSS then
@@ -513,6 +520,16 @@ function Goemon3SimpleHUD:render_player_status()
 
       gui.text(hud_x, hud_y, status_message)
       hud_y = hud_y + font_height
+
+      for player_index = 0, 3 do
+        status_message = string.format("%dP:", player_index + 1)
+        local player = self.chase_players[player_index + 1]
+
+        status_message = status_message .. string.format(" P(%05d,$%04X)", player.height, player.dimension)
+
+        gui.text(hud_x, hud_y, status_message)
+        hud_y = hud_y + font_height
+      end
     elseif self.game_state == self.GAME_STATE_IMPACT_MARCH then
       status_message = string.format(" EN%d D%d", self.impact.health, math.floor(self.camera_x / 256))
       if self.impact.cooldown_for_step ~= 0 then

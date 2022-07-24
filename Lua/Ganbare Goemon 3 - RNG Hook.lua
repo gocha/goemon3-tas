@@ -7,7 +7,9 @@ local readExcludePCs = {
   0x86C440, -- part of $86C43D, RNG update routine
   0x86C445, -- part of $86C43D, RNG update routine
   0x86C44A, -- part of $86C43D, RNG update routine
-  -- 0x86C45B, -- ?
+  -- 0x86C45B, -- related to generating a new sprite?
+  -- 0x8ABF77, -- panic stage #1: background object position?
+  -- 0x8AC3B2, -- panic stage #1: target character for spiked bar
   -- 0x8BBFBB, -- boss frog smoke position before appearing
   -- 0x8BC200, -- condition for boss frog smoke after flaming
 }

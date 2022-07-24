@@ -1,0 +1,12 @@
+SystemID SNES
+000086	w	h	0	WRAM	Random number
+0000A2	w	h	0	WRAM	Distance to go
+0005B0	d	s	0	WRAM	Goemon H position
+0005B4	d	h	0	WRAM	Goemon D position
+000610	d	s	0	WRAM	Ebisumaru H position
+000614	d	h	0	WRAM	Ebisumaru D position
+000670	d	s	0	WRAM	Sasuke H position
+000674	d	h	0	WRAM	Sasuke D position
+0006D0	d	s	0	WRAM	Yae H position
+0006D4	d	h	0	WRAM	Yae D position
+
