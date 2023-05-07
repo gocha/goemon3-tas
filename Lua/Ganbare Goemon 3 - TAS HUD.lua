@@ -1,5 +1,9 @@
 -- Ganbare Goemon 3 (J) Head-Up Display for TASing
 
+if _VERSION ~= "Lua 5.1" then
+  bit = (require "migration_helpers").EmuHawk_pre_2_9_bit();
+end
+
 function number_to_bcd(n)
   return tonumber(tostring(n), 16)
 end
@@ -42,7 +46,7 @@ function note_name(note_number)
   local names = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }
   note_number = math.floor(note_number)
   if note_number >= 0 then
-    return string.format("%-2s%d", names[1 + (note_number % 12)], note_number / 12)
+    return string.format("%-2s%d", names[1 + (note_number % 12)], math.floor(note_number / 12))
   else
     return string.format("%d", note_number)
   end
@@ -201,8 +205,8 @@ function Goemon3SimpleHUD:fetch()
   local realtime_seconds = self.realtime.frames / fps
   self.realtime.subseconds = realtime_seconds - math.floor(realtime_seconds)
   self.realtime.seconds = math.floor(realtime_seconds) % 60
-  self.realtime.minutes = math.floor(realtime_seconds) / 60 % 60
-  self.realtime.hours = math.floor(math.floor(realtime_seconds) / 60 / 60)
+  self.realtime.minutes = math.floor(realtime_seconds / 60) % 60
+  self.realtime.hours = math.floor(math.floor(realtime_seconds / 60 / 60))
   self.realtime.readable = ((self.realtime.hours == 0) and "" or string.format("%d:", self.realtime.hours)) ..
     string.format("%02d:%05.2f", self.realtime.minutes, self.realtime.seconds + self.realtime.subseconds)
 
