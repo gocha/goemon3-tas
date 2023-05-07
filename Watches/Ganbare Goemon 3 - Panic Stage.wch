@@ -9,4 +9,6 @@ SystemID SNES
 000674	d	h	0	WRAM	Sasuke D position
 0006D0	d	s	0	WRAM	Yae H position
 0006D4	d	h	0	WRAM	Yae D position
+000DC8	d	h	0	WRAM	Bismaru Pod X position
+000DCC	d	h	0	WRAM	Bismaru Pod Y position
 
