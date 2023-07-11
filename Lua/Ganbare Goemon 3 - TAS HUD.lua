@@ -159,6 +159,7 @@ function Goemon3SimpleHUD.new()
 
   self.show_player_status = true
   self.show_hitbox = true
+  self.show_base = false
   self.show_sound = true
   self.show_fireworks = true
   self.rng_tracking = false -- slow
@@ -297,6 +298,7 @@ function Goemon3SimpleHUD:fetch()
     local base_address = 0x0300 + (sprite_index * 0x50)
     local sprite = {}
 
+    sprite.base = base_address
     sprite.available = (mainmemory.read_u16_le(base_address) ~= 0)
     sprite.atrributes = {}
     sprite.atrributes.bits = mainmemory.readbyte(base_address + 0x04)
@@ -443,6 +445,18 @@ function Goemon3SimpleHUD:render_player_status()
         local sprite = self.sprites[sprite_index + 1]
         if sprite.available then
           gui.drawRectangle(sprite.hitbox.px_left, sprite.hitbox.px_top, sprite.hitbox.width, sprite.hitbox.height, gui.color(255, 0, 0, self.fade_level * 173))
+        end
+      end
+    end
+  end
+
+  -- base address
+  if self.show_base then
+    if self.platform_screen then
+      for sprite_index = 0, self.MAX_SPRITES do
+        local sprite = self.sprites[sprite_index + 1]
+        if sprite.available then
+          gui.drawText(sprite.hitbox.px_left, sprite.hitbox.px_top, string.format("%X", sprite.base))
         end
       end
     end
