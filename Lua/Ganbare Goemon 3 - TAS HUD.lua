@@ -159,7 +159,7 @@ function Goemon3SimpleHUD.new()
 
   self.show_player_status = true
   self.show_hitbox = true
-  self.show_base = false
+  self.show_base = not false
   self.show_sound = true
   self.show_fireworks = true
   self.rng_tracking = false -- slow
